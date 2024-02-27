@@ -1,6 +1,4 @@
-# demo-repo3
+# demo-repo
 
-hello how are you?  
-I am fine, how about you
-not fine alot of problems...  
-
+This repository is just for understanding git and it's commands.
+To understand and try out various functions and commands. 
