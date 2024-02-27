@@ -1,0 +1,446 @@
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Git
+
+differences between git(tool -- tracks the changes in your code over time) and github(website that hosts git repositories)
+providing a reliable way to track changes, collaborate with others, and maintain a history of project development.
+Git uses delta compression techniques to store file changes efficiently. Instead of storing complete copies of files for each commit, Git stores the differences (or deltas) between versions.
+
+
+working directory (current repo)  ------> staging area ------> commit to local repo -------> push to remote repo
+
+~ git remote -v                             --------> it is enough to have the remote url until the 'repository name' no need until the 'branch name'
+~ git branch
+~ git checkout <branch-name>                --------> to switch to a new branch
+~ git status                     
+~ git add .
+~ git commit -m "new changes"
+
+~ git push origin <branch-name>
+
+
+~ git branch <new-branch>                  ---------> creating a new branch
+~ git checkout <branch-name>               ---------> to switch to a new branch
+~ git checkout main                        ---------> to merge two branches
+~ git merge <branch-name>
+
+
+using Git for 
+1. used only by you, version control --- use add, commit
+2. used only by you, maintain a remote-repo (github) --- use add, commit, push
+3. when multiple people working on the same remote-repo (github) --- use clone(only once initially), add, commit, push, pull
+ 
+
+Git commands
+1. clone -- downloads the repository that is hosted somewhere(github) into your local computer
+2. add -- tracks your files and changes in git. when you have updated/deleted/added files/folders you tell git that you made changes and you want it to keep track of those changes
+3. commit -- save your files in git, save changes you make in your code
+4. push --   upload git commits to a remote repo like github/gitlab/bitbucket
+5. pull -- download changes from remote repo to your local machine
+branching???
+staging area
+
+if you remove all remotes in the directory will it still use git 
+what happens if you delete the .git directory in your system??
+
+
+README.md -- (md-markdown) to easily format your text about the description of the project
+# for main heading
+2 spaces + Enter   --- it goes to the next line
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------- Creating a Remote repo in Github ---------------------------------
+
+
+
+
+----------------------- Renaming a Remote repo in Github ---------------------------------
+
+if you renamed a remote-repo in github then you need to change the remote connection URL also
+
+
+------------------------- Deleating a Remote repo in Github ------------------------------
+
+go to that repository that you wanna delete (navigate to the main page of the repository)
+click the 'Settings' tab
+scroll down to 'Danger Zone'
+click 'Delete this repository'
+
+
+-------------------------------------- init -----------------------------------------------
+
+you can recreate the '.git' directory by reinitializing the repository. 
+Navigate to the root directory of your project in the terminal 
+This command initializes a new Git repository in the current directory, creating a new .git directory
+*** All the below commands will work in the local repository(folder) in the terminal, only if they have a .git directory inside them
+~ git init
+
+
+-------------------------------------- Clone ----------------------------------------------
+
+git clone --- used to create a local copy of a remote repository.
+git clone is typically used only once to initialize a new repository
+Copy from Remote/ Restore the whole repo from Remote: 
+If your repository is hosted on a remote server (e.g., GitHub, GitLab, Bitbucket), you can clone the repository again to a new location on your local machine. 
+This will create a fresh copy of the repository, including the .git directory.
+In the git clone command, you need to provide the URL of the Git repository you want to clone. This URL depends on where your repository is hosted.
+
+HTTPS/SSH -- lies in the method of authentication and the protocol used for communication
+Some popular hosting platforms are github, gitlab, bitbucket etc
+
+~ git clone <repository-url>
+~ git clone https://github.com/username/repository.git                (HTTPS)
+~ git clone git@github.com:username/repository.git                    (SSH -- If you have SSH access set up for your repository, you can use the SSH URL instead)
+
+
+
+-------------------------------------- Config ---------------------------------------------
+
+You can use git config to set your user name and email address, which are used to identify your commits.
+This is used when you make a commit to a repository
+to view what config that you have use 
+~ .git/config             (will ask which app to open with -- say to open with vscode)
+(or)
+~ cd .git
+~ vim config
+
+~ git config --global user.email "you@example.com"
+~ git config --global user.name "Your Name"
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+~ git config user.email "allaavinashreddy333@gmail.com"
+~ git config user.name "Alla-Avinash"
+
+
+
+-------------------------------------- Remote ---------------------------------------------
+
+The 'git remote' command is used to manage connections to remote repositories.
+A remote repository is a version of your project that is hosted on a server, separate from your local machine. 
+
+If you have multiple branches in your remote Git repository and you only have a single remote connection configured in your local repository, typically named origin, you do not need to change the remote URL or connection when switching between branches.
+However, when you want to push changes to a specific branch on the remote repository or fetch updates from a specific branch, you need to specify the branch name as part of the Git command. 
+You typically use remotes to synchronize changes between your local repository and the remote repository, allowing you to collaborate with others and backup your work.
+will list all the connection names that you have associated with your local repo
+~ git remote       
+
+Listing Remotes: 
+To see which remote repositories your local repository is connected to
+This command will list all remote repositories along with their URLs.
+~ git remote -v
+
+Adding Remotes: 
+To add a new remote repository
+This command adds a new remote with the specified <name> and <url>. 
+The <name> is a short alias that you can use to refer to the remote repository in other commands.
+most common alias preferable is 'origin' 
+~ git remote add <alias-name> <url>
+
+Renaming Remotes:
+we are only renaming alias but not the original connection
+~ git remote rename <old-name> <new-name>
+
+Removing Remotes:
+~ git remote remove <name>
+
+Changing URL of Remotes:
+~ git remote set-url <name> <new-url>
+
+
+if you remove all remotes in the directory will it still use git 
+what happens if you delete the .git directory in your system??
+
+
+
+-------------------------------------- Staging Area ---------------------------------------
+
+the staging area in git acts as a middle ground between the local directory (current working directory) and your local git (not remote repo) repository (repository's commit history).
+local directory ----> staging area -----> local git repository (not remote/github) 
+It acts as a holding area for changes that you want to include in your next commit.
+
+staging changes 
+The staging area allows you to selectively choose which changes you want to include in your next commit. 
+You use the 'git add' command to move changes from your working directory to the staging area. This process is often referred to as "staging" changes.
+When you're satisfied with the changes you've staged, you use the git commit command to create a new commit, which captures the state of the files in the staging area at that moment.
+
+You add files to the staging area explicitly using git add, and only changes that have been staged will be included in the next commit. 
+Unstaged changes will remain in your working directory until you stage them using git add.
+
+~ git add      ----> To add files to the staging area in Git
+~ git status   ----> To view the contents of the staging area in Git
+~ git reset    ----> To remove changes from the staging area in Git
+~ git restore --staged <filename>  ----> 
+
+
+
+------------------------------------------- Status ----------------------------------------
+
+git status command is used to display the current state of the working directory and the staging area (index) in a Git repository.
+It is used to display:
+1. Untracked Files: If there are any files in your working directory that Git is not tracking, git status will list them as "untracked files"
+                    These are files that Git is not currently aware of, meaning they have not been added to the stagging area.
+2. Modified Files: If there are any tracked files in your working directory that have been modified since the last commit, git status will list them as "modified"
+3. Staged Changes: If there are any changes that have been staged (using git add) but not yet committed, git status will list them as "changes to be committed." 
+                   These are changes that you have indicated you want to include in the next commit.
+4. Branch Information: git status also displays information about the current branch, including the branch name and whether it is ahead or behind the remote branch. 
+                       This helps you understand the relationship between your local branch and the corresponding remote branch.
+~ git status
+
+
+
+-------------------------------------- Add ------------------------------------------------
+
+To add files to the staging area in Git
+It tracks your files and changes in git
+use this when you have 'added/updated/deleted' --- 'files/folders' you tell git that you made changes and you want it to keep track of those changes
+used to stage changes for commit. It tells Git which files or changes you want to include in the next commit.
+git add --- specify which modifications you want to include in the commit
+
+~ git add file1 file2 file3
+~ git add path/to/file1 path/to/file2
+~ git add *.txt
+
+
+the below command stages all changes in the working directory for the next commit
+~ git add .
+
+
+-------------------------------------- Restore --------------------------------------------
+
+git restore --  is primarily used to discard changes in your working directory or staging area and restore files to a previous state.
+
+~ git restore <file1> <file2>      -----> Discards changes in the working directory for the specified file, reverting it to the state at the last commit.
+~ git restore --staged <file>      -----> Unstages changes for the specified file(s), moving them from the staging area back to the working directory.
+
+Undoing local modifications before committing.
+Unstaging changes that were mistakenly added to the staging area using git add.
+
+
+-------------------------------------- Commit ---------------------------------------------
+
+The commit command is used to save the staged changes to the Git repository. It creates a snapshot of the changes you've made.
+Once you've staged your changes using git add, you use git commit to permanently save those changes to the repository. 
+Each commit has a unique identifier and is accompanied by a commit message that describes the changes made in that commit like "Added feature X"
+
+~ git commit -m "Commit message"
+
+The unique identifier for a commit is its SHA-1 hash, also known as the commit hash or commit ID. 
+This hash is a 40-character hexadecimal string that uniquely identifies each commit within a repository.
+
+Commit History:
+Linear History: Each commit in Git has a unique identifier (SHA-1 hash), and commits are organized in a linear sequence, forming the commit history of the repository.
+Branches and Merging: Commits can be organized into branches, allowing for parallel development. Merging branches combines commit histories to create a unified history.
+To view the commit history use (this gives us the commit hashes of the commits)
+
+~ git log       
+
+
+
+Reverting and Amending Commits:
+
+Reverting: If you need to undo the changes introduced by a commit, you can use git revert to create a new commit that undoes the changes made by the original commit.
+you can get the commit-hash from   ~ git log
+~ git revert <commit-hash>
+
+Amending: If you need to modify the most recent commit (e.g., to update the commit message or add additional changes), you can use git commit --amend to amend the last commit.
+Firt stage the modified files using git add to add them to the staging area.
+~ git commit --amend
+~ git commit --amend -m "New commit message"
+
+
+
+
+-------------------------------------- Branching ------------------------------------------
+
+Branching in Git allows you to diverge from the main line of development and continue working on new features or fixes without affecting the main codebase.
+Each branch represents an independent line of development with its own commits and changes.
+
+
+Pointers in branching:
+Branching in Git does not create new directories or repositories in your local repository.
+
+When you create a new branch in Git, it essentially creates a new pointer that points to the same commit as the branch you were on when you created it. 
+This means that initially, the new branch shares the same commit history as the branch it was created from.
+
+Each branch in Git is stored as a reference to a specific commit in the repository's history. 
+This reference is updated whenever new commits are made on that branch.
+
+
+
+Creating a Branch:
+To create a new branch
+~ git branch <branch-name>
+
+Switching to a Branch:
+To switch to the newly created branch or any existing branch
+~ git checkout <branch-name>
+
+Making Changes
+Once you're on the new branch, you can make changes to your files as needed. 
+These changes will be isolated to the feature branch and will not affect the main branch (or any other branch).
+Staging and Committing Changes
+~ git add <file1> <file2> ...
+~ git commit -m "Commit message"
+
+Listing Branches:
+displays a list of all branches in the repository and indicates the currently active branch
+currently active branch is indicated by the asterisk (*)
+the name of the default branch will typically be 'main' or 'master' for the default branch
+~ git branch
+
+to display both local and remote branches
+It shows all branches, including local branches and remote branches that have been fetched from the remote repository
+~ git branch -a
+
+
+
+--------------------------------------- Merging -------------------------------------------
+
+Merging Branches:
+Once you've completed work on a branch and want to incorporate its changes back into the main branch, you can merge the branch using git merge
+If there are no conflicts, Git will automatically merge the changes from the feature branch into main. 
+If conflicts occur, you'll need to resolve them manually before completing the merge.
+merging a 'feature' branch into the main branch, the 'feature' branch itself is not automatically deleted
+
+source branch (the branch being merged) ------- destination branch (the branch being merged into)
+    <new-branch>                                    main branch
+Performs a "merge commit" by default, which creates a new commit that combines the changes from the source branch (the branch being merged) with the destination branch (the branch being merged into)
+
+~ git checkout main
+~ git merge <branch-name>
+
+
+Deleting a Branch:
+After merging a branch, you can delete it using the git branch -d command
+~ git branch -d <branch-name>                 ------> for the local git repository
+~ git push origin --delete <branch-name>      ------> for remote git repository
+ 
+
+
+
+-------------------------------------- Push -----------------------------------------------
+
+The push command is used to upload your local commits to a remote repository, such as GitHub, GitLab, or Bitbucket.
+After committing your changes locally, you use git push to synchronize your local repository with a remote repository. 
+This makes your changes accessible to others and updates the remote repository with your latest commits.
+use push ---- to synchronize the commits made in a branch from your local repository to the corresponding branch in the remote repository
+<remote-name> --- the connection of the remote repository
+<branch-name> --- the name of the local branch that you want to push to the remote repository
+
+~ git push <remote-name> <branch-name>
+
+
+-------------------------------------- Pull -----------------------------------------------
+
+git pull is used to update your local repository with changes from a remote repository.
+git pull is used regularly to keep your local repository up-to-date with changes from the remote repository.
+
+difference between git clone and git pull???
+git clone --- used to create a local copy of a remote repository.
+git clone is typically used only once to initialize a new repository
+
+The pull command is used to download changes from a remote repository to your local machine and merge them into your current branch.
+If changes have been made to the remote repository since your last synchronization, you use git pull to fetch those changes and apply them to your local repository. 
+This ensures that your local copy is up-to-date with the remote repository.
+
+~ git pull <remote-name> <branch-name>
+
+
+-------------------------------------- Reset ----------------------------------------------
+
+used to reset the current branch to a specific state. 
+It can be used to move the branch pointer to a different commit, reset the staging area, or reset both the staging area and working directory.
+
+~ git reset <commit>     ----  Moves the branch pointer to the specified commit, resetting the staging area and working directory to match the state of that commit.
+~ git reset HEAD <file>  ---- Unstages changes for the specified file(s) by moving them from the staging area back to the working directory, without changing the commit history.
+
+Uses:
+Removing commits from the branch history.
+Unstaging changes that were added to the staging area using git add.
+Resetting the working directory and/or staging area to a previous state.
+
+
+
+-------------------------------------- Diff -----------------------------------------------
+
+To view the changes made in your local repository for the main branch and any other branches
+
+1. View Changes Between Branches:
+to compare the differences between two branches
+display the differences between the two branches
+~ git diff main..<new-branch-name>
+or
+~ git diff <1st-branch-name>..<2nd-branch-name>
+
+2. View file/ folder changes in specific location:
+specific file paths to view changes for individual files
+~ git diff main..<new-branch-name> <file_name_with_path>
+~ git diff <file>
+
+3. View Changes in the Working Directory:
+To view the changes in the working directory that have not yet been staged (i.e., changes made since the last commit)
+This command will show the unstaged changes in the working directory
+~ git diff
+or
+~ git diff <file>
+
+4. View Changes in the Staging Area:
+To view the changes that have been staged (i.e., changes that are ready to be committed)
+show the differences between the staging area and the last commit
+~ git diff --cached
+
+
+
+-------------------------------------- Show -----------------------------------------------
+
+View Changes in a Specific Commit:
+If you want to view the changes introduced by a specific commit
+display the details of the commit, including the changes made
+~ git show <commit-hash>
+or
+git show <commit-hash> <file>
+
+
+
+-------------------------------------- fetch ----------------------------------------------
+
+when we want to retrieve updates from a remote repository but don't want to merge those changes into our local branch immediately.
+
+Fetch Updates:
+Fetch updates from the remote repository using git fetch. You can specify the remote repository name if you have multiple remotes, or you can omit it if you only have one remote connection
+~ git fetch <branch-name>
+
+
+
+
+
+
+-------------------------------------- new commands -----------------------------------------------------------------------------------
+ 
+Update Local Branches:
+If you want to update your local branches to match the corresponding remote branches, you can do so by checking out the local branch and merging or rebasing it onto the updated remote branch
+~ git checkout <local-branch>
+~ git merge <remote-connection-name>/<remote-branch>
+
+
+Review Changes:
+You can review the changes fetched from the remote repository using git log or other Git commands. 
+For example, to view the commit history of a specific remote branch:
+~ git log <remote-connection-name>/<branch-name>
+
+
+If you have multiple branches in your remote Git repository and you only have a single remote connection configured in your local repository, typically named origin, you do not need to change the remote URL or connection when switching between branches.
+However, when you want to push changes to a specific branch on the remote repository or fetch updates from a specific branch, you need to specify the branch name as part of the Git command. 
+~ git push origin <branch-name>
+~ git fetch origin <branch-name>
+
+
+
