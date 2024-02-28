@@ -49,6 +49,8 @@ what happens if you delete the .git directory in your system??
 
 README.md -- (md-markdown) to easily format your text about the description of the project
 # for main heading
+## sub-headings
+### sub-sub-headings
 2 spaces + Enter   --- it goes to the next line
 
 
