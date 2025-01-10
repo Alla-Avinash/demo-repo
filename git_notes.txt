@@ -9,10 +9,23 @@ differences between git(tool -- tracks the changes in your code over time) and g
 providing a reliable way to track changes, collaborate with others, and maintain a history of project development.
 Git uses delta compression techniques to store file changes efficiently. Instead of storing complete copies of files for each commit, Git stores the differences (or deltas) between versions.
 
-
+general flow of things in git
 working directory (current repo)  ------> staging area ------> commit to local repo -------> push to remote repo
 
-~ git remote -v                             --------> it is enough to have the remote url until the 'repository name' no need until the 'branch name'
+whenever you want to track file changes using git...
+~ git init
+
+whenever you want to upload a new file to git...
+
+
+whenever you want to update a file from your local repo to remote github repo...
+
+
+
+
+
+
+~ git remote -v                             --------> it is enough to have the remote url until the 'repository name' no need to give the remote url until the 'branch name'
 ~ git branch
 ~ git checkout <branch-name>                --------> to switch to a new branch
 ~ git status                     
@@ -28,11 +41,15 @@ working directory (current repo)  ------> staging area ------> commit to local r
 ~ git merge <branch-name>
 
 
+
+
+
 using Git for 
 1. used only by you, version control --- use add, commit
 2. used only by you, maintain a remote-repo (github) --- use add, commit, push
 3. when multiple people working on the same remote-repo (github) --- use clone(only once initially), add, commit, push, pull
- 
+
+
 
 Git commands
 1. clone -- downloads the repository that is hosted somewhere(github) into your local computer
