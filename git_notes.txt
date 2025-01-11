@@ -16,12 +16,26 @@ whenever you want to track file changes using git...
 ~ git init
 
 whenever you want to upload a new file to git...
-
+1. without converting your folder/directory as a git-repo
+    ~ git clone
+    ~ Copy the specific file into the cloned repository
+    ~ git add .
+    ~ add email address for commit
+    ~ git commit -m 'message'
+    ~ git push origin
+    ~ delete the temp repo
+2. If the current folder is a git-repo
 
 whenever you want to update a file from your local repo to remote github repo...
 
 
+using Git for ----->
+1. used only by you, on your local-repo (version control) --- use add, commit
+2. used only by you, maintain a remote-repo (github) --- use add, commit, push
+3. when multiple people working on the same remote-repo (github) --- use clone(only once initially), add, commit, push, pull
 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -41,16 +55,6 @@ whenever you want to update a file from your local repo to remote github repo...
 ~ git merge <branch-name>
 
 
-
-
-
-using Git for 
-1. used only by you, version control --- use add, commit
-2. used only by you, maintain a remote-repo (github) --- use add, commit, push
-3. when multiple people working on the same remote-repo (github) --- use clone(only once initially), add, commit, push, pull
-
-
-
 Git commands
 1. clone -- downloads the repository that is hosted somewhere(github) into your local computer
 2. add -- tracks your files and changes in git. when you have updated/deleted/added files/folders you tell git that you made changes and you want it to keep track of those changes
@@ -63,6 +67,7 @@ staging area
 if you remove all remotes in the directory will it still use git 
 what happens if you delete the .git directory in your system??
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 README.md -- (md-markdown) to easily format your text about the description of the project
 # for main heading
@@ -99,6 +104,7 @@ you can recreate the '.git' directory by reinitializing the repository.
 Navigate to the root directory of your project in the terminal 
 This command initializes a new Git repository in the current directory, creating a new .git directory
 *** All the below commands will work in the local repository(folder) in the terminal, only if they have a .git directory inside them
+*** to make a local git repo
 ~ git init
 
 
